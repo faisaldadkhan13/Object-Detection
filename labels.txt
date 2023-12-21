@@ -1,0 +1,6 @@
+Person
+Car
+Dog
+Bike
+Clock
+Watch
