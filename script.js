@@ -38,3 +38,32 @@ async function detectObjects(img) {
         ctx.fillText(`${prediction.class} (${Math.round(prediction.score * 100)}%)`, prediction.bbox[0], prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10);
     });
 }
+// Read the labels.txt file
+fetch('labels.txt')
+    .then(response => response.text())
+    .then(labels => {
+        const classLabels = labels.split('\n').filter(label => label.trim() !== '');
+        initModel(classLabels);
+    })
+    .catch(error => console.error('Error reading labels.txt:', error));
+
+async function initModel(classLabels) {
+    const model = await cocoSsd.load();
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Other code for handling image and drawing objects
+    // ...
+
+    predictions.forEach((prediction) => {
+        ctx.beginPath();
+        ctx.rect(prediction.bbox[0], prediction.bbox[1], prediction.bbox[2], prediction.bbox[3]);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'red';
+        ctx.fillStyle = 'red';
+        ctx.stroke();
+
+        const label = classLabels[prediction.class];
+        ctx.fillText(`${label} (${Math.round(prediction.score * 100)}%)`, prediction.bbox[0], prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10);
+    });
+}
