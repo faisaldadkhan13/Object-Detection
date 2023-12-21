@@ -28,14 +28,19 @@ async function detectObjects(img) {
 
     const predictions = await model.detect(canvas);
 
+    // Adjust confidence threshold (e.g., 0.2 for more objects)
+    const confidenceThreshold = 0.2;
+
     predictions.forEach((prediction) => {
-        ctx.beginPath();
-        ctx.rect(prediction.bbox[0], prediction.bbox[1], prediction.bbox[2], prediction.bbox[3]);
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = 'red';
-        ctx.fillStyle = 'red';
-        ctx.stroke();
-        ctx.fillText(`${prediction.class} (${Math.round(prediction.score * 100)}%)`, prediction.bbox[0], prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10);
+        if (prediction.score >= confidenceThreshold) {
+            ctx.beginPath();
+            ctx.rect(prediction.bbox[0], prediction.bbox[1], prediction.bbox[2], prediction.bbox[3]);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'red';
+            ctx.fillStyle = 'red';
+            ctx.stroke();
+            ctx.fillText(`${prediction.class} (${Math.round(prediction.score * 100)}%)`, prediction.bbox[0], prediction.bbox[1] > 10 ? prediction.bbox[1] - 5 : 10);
+        }
     });
 }
 // Read the labels.txt file
