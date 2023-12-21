@@ -1,5 +1,6 @@
 Person
 Car
+Truck
 Dog
 Bike
 Clock
