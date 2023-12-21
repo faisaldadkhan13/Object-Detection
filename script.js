@@ -29,7 +29,7 @@ async function detectObjects(img) {
     const predictions = await model.detect(canvas);
 
     // Adjust confidence threshold (e.g., 0.2 for more objects)
-    const confidenceThreshold = 5.3;
+    const confidenceThreshold = 0.1;
 
     predictions.forEach((prediction) => {
         if (prediction.score >= confidenceThreshold) {
