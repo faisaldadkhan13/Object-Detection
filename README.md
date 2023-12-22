@@ -6,3 +6,11 @@ Object detection application created using the OpenCV.
 <p> Click on Choose File & upload the image file from your gallery.</p>
 <p> After uploading the image, click on Detect Objects & wait till the server analyzes the image. </p>
 <p> Then you will have an image with red colour labels. </p>
+
+
+
+
+----------------------------------------------------------------------------------------------------------
+
+
+**By Faisal Dad Khan**
